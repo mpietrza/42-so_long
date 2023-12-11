@@ -6,7 +6,7 @@
 /*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:19:46 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/12/02 14:36:25 by mpietrza         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:29:54 by mpietrza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ typedef struct s_data
 	int		pos_y;
 	int		counter;
 	int		collected;
-	t_map	*map;
 	t_img	*img;
 }		t_data;
 
@@ -82,9 +81,9 @@ typedef struct s_point
 }				t_point;
 
 /* list of functions */
-int		ft_1st_line_len(int fd);
+// int		ft_1st_line_len(int fd);
 int		ft_count_chars(char *s, char c);
-int		ft_count_lines(int fd, t_data *data, int img_w);
+//int		ft_count_lines(int fd, t_data *data, int img_w);
 void	ft_cleanup_img(t_data *data);
 void	ft_cleanup_map(t_map *map);
 void	ft_cleanup_data(t_data *data);
@@ -100,7 +99,7 @@ void	ft_map_check_path(t_data *data);
 void	ft_map_check_scan(t_data *data);
 void	ft_map_find_start_pos(t_data *data);
 void	ft_map_load_textures(t_data *data);
-void	ft_map_parse(t_data *data, char **argv, int argc);
+char	*ft_map_parse(int fd, t_point window_size);
 char	**ft_map_temp(t_data *data);
 void	ft_move(t_data *data, char pos, int dir);
 void	ft_put_background(t_data *data);

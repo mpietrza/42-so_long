@@ -6,7 +6,7 @@
 /*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:20:32 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/12/02 14:36:20 by mpietrza         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:29:46 by mpietrza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,42 +38,50 @@ static int	ft_render_next_frame(t_data *data)
 	return (0);
 }
 
+int	ft_open_map_file(char **argv)
+{
+	int fd;
+
+	fd = open(argv[1], O_RDONLY);
+	ft_printf("Debug fd = %d\n", fd);
+	if (fd < 0)
+		ft_error_exit("Error\nReading the map not successful\n");
+	if (ft_strnstr(argv[1], ".ber", ft_strlen_int(argv[1])) == NULL)
+		ft_error_exit("Error\nWrong map extension, must be a '.ber' file\n");
+	return (fd);
+}
+
+
 int	main(int argc, char **argv)
 {
-	t_data	*data;
+	t_data	*data = NULL;
+	t_point	*map_size = NULL;
+	t_map	*map = NULL;
+	char	*buff_for_arr = NULL;
+	int		fd;
 
-	data = (t_data *)malloc(sizeof(t_data));
-	if (!data)
+	if (argc != 2)
+		ft_error_exit("Error\nUse: './so_long mappath/mapname.ber'\n");
+	if (ft_strnstr(argv[1], ".ber", ft_strlen_int(argv[1])) == NULL)
+		ft_error_exit("Error\nWrong map extension, must be a '.ber' file\n");
+	fd = ft_open_map_file(argv);
+	map_size = (t_point *)malloc(sizeof(t_point));
+	if (!map_size)
+	{
+		close(fd);
 		ft_error_exit("Error\nNot able to initialize the program\n");
-	//Debug start
-	ft_printf("Debug1 %d\n%", data->size_x);
-	//data initialized debug end
-	ft_init_data(data);
-	//Debug start
-	ft_printf("Debug2 %d\n%", data->size_x);
-	//all in data set to 0 and NULL
-	ft_window_size(data, argv);
-	//Debug start
-	ft_printf("Debug3 window size:y = %d x = %d\n%", data->size_y, data->size_x);
-	//checked if the map file name and extension is alright and what is the map size
-	data->mlx = mlx_init();
-	//Debug start
-	ft_printf("Debug4 mlx_init %s\n", data->mlx);
-	//
-	if (!data->mlx)
-		ft_free_and_exit(data, "Error\nNot able to initialize the program\n");
-	//Debug start
-	ft_printf("Debug5 mlx_init check %s\n", data->mlx);
-	//
-	ft_init_img(data);
-	//Debug start
+	}
+	buff_for_arr = ft_map_parse(fd, map_size);
+	map = ft_init_map(buff_for_arr, map_size);
+	ft_printf("Debug2 map size_x = %d, map size_y = %d\n%", map_size->size_x, map_size->size_y);
+	data = ft_init_data(map_size);
+	if (!data)
+		ft_cleanup_and_exit(data, map, "Error\nNot able to initialize the program\n")
+	data->img = ft_init_img(void);
+	if (!data->img)
+		ft_cleanup_and_exit(data, map, "Error\nNot able to read the textures\n")
 	ft_printf("Debug6 ft_init_img:\nplayer_up = %s,\nexit = %s\n",
 		data->img->player_up, data->img->exit);
-	ft_init_map(data);
-	//Debug start
-	ft_printf("Debug 7\n");
-	//
-	ft_map_parse(data, argv, argc);
 	data->window = mlx_new_window(data->mlx,
 			data->size_x, data->size_y, "./so_long");
 	if (!data->window)

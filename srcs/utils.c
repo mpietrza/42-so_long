@@ -6,50 +6,21 @@
 /*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:05:35 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/12/02 14:26:47 by mpietrza         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:29:51 by mpietrza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int	ft_strlen_int(const char *str)
-{
-	int	len;
-
-	len = 0;
-	while (str[len] != '\0')
-		len++;
-	return (len);
-}
-
-int	ft_1st_line_len(int fd)
-{
-	char	buffer[1];
-	int		len;
-	int		bytes;
-
-	bytes = 1;
-	len = 0;
-	while (1)
-	{
-		bytes = read(fd, buffer, sizeof(buffer));
-		if (bytes <= 0)
-			break ;
-		if (buffer[0] == '\n')
-			return (len);
-		len++;
-		if (bytes == -1)
-			return (-1);
-	}
-	return (len);
-}
-
-int	ft_count_lines(int fd, t_data *data, int img_w)
+char	*ft_map_parse(int fd, t_point map_size)
 {
 	char	*line;
+	char	*buff_for_ar
 	int		num_of_lines;
 	int		line_len;
-
+	int		prev_line_len;
+	
+	prev_line_len = 0;
 	num_of_lines = 0;
 	while (1)
 	{
@@ -57,20 +28,25 @@ int	ft_count_lines(int fd, t_data *data, int img_w)
 		if (line == NULL)
 			break ;
 		line_len = (int)ft_strlen(line);
-		if ((line_len < (data->size_x / img_w))
-			|| (line_len == 1 && *line != '\n'))
+		if (line_len != prev_line_len)
 		{
 			free(line);
-			ft_free_and_exit(data, "Error\nThe map is corrupted\n");
+			ft_free_and_exit(data, "Error\nThe map is not rectangular\n");
 		}
 		else
 		{
+			ft_strlcat(buf_for_arr, line, line_len);
 			free(line);
+			prev_line_len = line_len;
 			num_of_lines++;
 		}
 	}
+	buf_for_arr[(int)ft_strlen(line) - 1] = '\0';
 	free(line);
-	return (num_of_lines);
+	close(fd);
+	map_size->x = line_len;
+	map_size->y = num_of_lines;
+	return (buff_for_arr);
 }
 
 int	ft_count_chars(char *s, char c)

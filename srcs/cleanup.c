@@ -6,11 +6,23 @@
 /*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:03:02 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/12/02 14:36:12 by mpietrza         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:30:09 by mpietrza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
+
+void	ft_cleanup_map_size(t_point *map_size)
+{
+	if (map_size)
+	{
+		if (map_size->x)
+			free(map_size->x);
+		if (map_size->y)
+			free(map_size->y);
+		free(map_size);
+	}
+}
 
 void	ft_cleanup_img(t_data *data)
 {
@@ -112,17 +124,3 @@ void	ft_cleanup_data(t_data *data)
 	}
 }
 
-void	cleanup_and_exit(t_data *data, const char *error_message)
-{
-	if (data)
-		ft_cleanup_data(data);
-	ft_error_exit(error_message);
-}
-
-void	ft_free_and_exit(t_data *data, const char *error_message)
-{
-	free(data->map);
-	free(data->img);
-	free(data);
-	ft_error_exit(error_message);
-}
