@@ -6,32 +6,32 @@
 /*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:15:08 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/11/30 14:35:38 by mpietrza         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:26:04 by mpietrza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-char	**ft_map_temp(t_data *data)
+char	**ft_arr_temp(t_map *map)
 {
 	int		y;
-	char	**map_temp;
+	char	**arr_temp;
 
-	map_temp = (char **)malloc(data->size_y * sizeof(char *));
-	if (!map_temp)
+	arr_temp = (char **)malloc(map->map_size->y * sizeof(char *));
+	if (!arr_temp)
 		return (NULL);
 	y = 0;
-	while (y < data->size_y / IMG_H)
+	while (y < map->map_size->y)
 	{
-		map_temp[y] = (char *)malloc((data->size_x / IMG_W + 1) * sizeof(char));
-		if (!map_temp[y])
+		arr_temp[y] = (char *)malloc((map->map_size->x + 1) * sizeof(char));
+		if (!arr_temp[y])
 			return (NULL);
-		map_temp[y] = ft_strdup(data->map->arr[y]);
-		map_temp[y][data->size_x / IMG_W] = '\0';
+		arr_temp[y] = ft_strdup(map->arr[y]);
+		arr_temp[y][map->map_size->x] = '\0';
 		y++;
 	}
-	map_temp[y] = NULL;
-	return (map_temp);
+	arr_temp[y] = NULL;
+	return (arr_temp);
 }
 
 static void	ft_fill(char **tab, t_point *size, t_point *cur, char to_fill)

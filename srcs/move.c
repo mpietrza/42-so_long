@@ -6,7 +6,7 @@
 /*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:28:19 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/11/29 18:51:20 by mpietrza         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:25:42 by mpietrza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	ft_move_filter(t_data *data, char pos, int dir)
 		ft_printf("You must collect all the collectibles first\n");
 }
 
-void	ft_move(t_data *data, char pos, int dir)
+void	ft_move(t_data *data, t_map *map, char pos, int dir)
 {
 	t_point	*prev_pos;
 
@@ -74,7 +74,7 @@ void	ft_move(t_data *data, char pos, int dir)
 		(data->pos_x * IMG_W), (data->pos_y * IMG_H));
 	ft_move_filter(data, pos, dir);
 	ft_player_move(data, pos, dir);
-	if (data->map->arr[data->pos_y][data->pos_x] == 'C')
+	if (map->arr[data->pos_y][data->pos_x] == 'C')
 		ft_collect(data, pos, dir);
 	ft_move_message(data, prev_pos);
 	free(prev_pos);

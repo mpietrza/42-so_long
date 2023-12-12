@@ -6,7 +6,7 @@
 #    By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 14:21:04 by mpietrza          #+#    #+#              #
-#    Updated: 2023/12/04 15:32:31 by mpietrza         ###   ########.fr        #
+#    Updated: 2023/12/12 14:21:55 by mpietrza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,9 +48,8 @@ SRC			= initialize.c \
 			  move.c \
 			  put_textures.c \
 			  so_long.c \
-			  utils.c \
-			  window_size.c 
-
+			  utils.c
+			 
 SRCS		= $(addprefix $(DIR_SRCS), $(SRC))
 
 OBJS		= $(addprefix $(DIR_OBJS), $(SRC:.c=.o))

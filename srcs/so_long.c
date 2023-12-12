@@ -6,7 +6,7 @@
 /*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:20:32 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/12/11 18:29:46 by mpietrza         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:26:01 by mpietrza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(int argc, char **argv)
 	t_data	*data = NULL;
 	t_point	*map_size = NULL;
 	t_map	*map = NULL;
-	char	*buff_for_arr = NULL;
+	char	*buf_for_arr = NULL;
 	int		fd;
 
 	if (argc != 2)
@@ -72,20 +72,19 @@ int	main(int argc, char **argv)
 		ft_error_exit("Error\nNot able to initialize the program\n");
 	}
 	buff_for_arr = ft_map_parse(fd, map_size);
-	map = ft_init_map(buff_for_arr, map_size);
-	ft_printf("Debug2 map size_x = %d, map size_y = %d\n%", map_size->size_x, map_size->size_y);
+	map = ft_init_map(buf_for_arr, map_size);
+	ft_map_checks(map);
+	ft_printf("Debug2 map size_x = %d, map size_y = %d\n%",
+		map_size->size_x, map_size->size_y);
 	data = ft_init_data(map_size);
 	if (!data)
-		ft_cleanup_and_exit(data, map, "Error\nNot able to initialize the program\n")
-	data->img = ft_init_img(void);
-	if (!data->img)
-		ft_cleanup_and_exit(data, map, "Error\nNot able to read the textures\n")
+		ft_clup_map_and_exit(map, "Error\nNot able to initialize the program\n")
 	ft_printf("Debug6 ft_init_img:\nplayer_up = %s,\nexit = %s\n",
 		data->img->player_up, data->img->exit);
 	data->window = mlx_new_window(data->mlx,
 			data->size_x, data->size_y, "./so_long");
 	if (!data->window)
-		cleanup_and_exit(data, "Error\nFailed to create window\n");
+		ft_clup_and_exit(data, map, "Error\nFailed to create window\n");
 	ft_render_next_frame(data);
 	mlx_loop(data->mlx);
 	return (0);

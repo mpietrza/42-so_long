@@ -6,25 +6,19 @@
 /*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:03:02 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/12/11 18:30:09 by mpietrza         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:26:08 by mpietrza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	ft_cleanup_map_size(t_point *map_size)
+void	ft_clup_map_size(t_point *map_size)
 {
 	if (map_size)
-	{
-		if (map_size->x)
-			free(map_size->x);
-		if (map_size->y)
-			free(map_size->y);
 		free(map_size);
-	}
 }
 
-void	ft_cleanup_img(t_data *data)
+void	ft_clup_img(t_data *data)
 {
 	if (data->img)
 	{
@@ -67,7 +61,7 @@ void	ft_cleanup_img(t_data *data)
 
 }
 
-void	ft_cleanup_map(t_map *map)
+void	ft_clup_map(t_map *map)
 {
 	int	i;
 
@@ -83,25 +77,24 @@ void	ft_cleanup_map(t_map *map)
 					free(map->arr[i]);
 					ft_printf("debug: freed ft_cleanup_map->arr[%d]\n", i);
 					i++;
-
 				}
 			}
-			//free(map->arr[i]);
-		//	ft_printf("debug: freed ft_cleanup_map->arr[%d]\n", i);
 			free(map->arr);
 			ft_printf("debug: freed ft_cleanup_map->arr\n");
+			if (map->map_size)
+				free(map->map_size);
+			if (map->player_pos)
+				free(map->player_pos);
 		}
 		free(map);
 		ft_printf("debug: free(map) - ft_cleanup_map complete\n");
 	}
 }
 
-void	ft_cleanup_data(t_data *data)
+void	ft_clup_data(t_data *data)
 {
 	if (data)
 	{
-		if (data->map)
-			ft_cleanup_map(data->map);
 		if (data->mlx && data->window)
 		{
 			ft_printf("debug: ft_cleanup_data->mlx && data->window started\n");
@@ -111,7 +104,7 @@ void	ft_cleanup_data(t_data *data)
 		}
 		if (data->img)
 		{
-			ft_cleanup_img(data);
+			ft_clup_img(data);
 			ft_printf("debug: ft_cleanup_img complete\n");
 		}
 		if (data->mlx)
