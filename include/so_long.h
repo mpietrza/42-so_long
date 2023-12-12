@@ -102,14 +102,14 @@ void	ft_map_checks(t_map *map); //new
 void	ft_map_check_path(t_map *map);
 void	ft_map_check_scan(t_map *map);
 t_point	*ft_map_find_start_pos(t_map *map);
-void	ft_map_load_textures(t_data *data);
+void	ft_map_load_textures(t_data *data, t_map *map);
 char	*ft_map_parse(int fd, t_point *map_size); //ok
 char	**ft_arr_temp(t_map *map);
 void	ft_move(t_data *data, t_map *map, char pos, int dir);
 int		ft_open_map_file(char **argv); //new
 void	ft_put_background(t_data *data);
-void	ft_put_object(t_data *data, void *img);
-void	ft_put_player(t_data *data);
+void	ft_put_object(t_data *data, t_map *map, void *img);
+void	ft_put_player(t_data *data, t_map *map);
 //int		ft_strlen_int(const char *str); -not used anymore
 void	ft_win(t_data *data);
 //void	ft_window_size(t_data *data, char **argv); -not used anymore
