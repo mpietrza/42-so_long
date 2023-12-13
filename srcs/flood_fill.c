@@ -6,7 +6,7 @@
 /*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:15:08 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/12/13 16:36:24 by mpietrza         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:04:31 by mpietrza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ char	**ft_arr_temp(t_map *map)
 	y = 0;
 	while (y < map->map_size->y)
 	{
-	//	arr_temp[y] = (char *)malloc((map->map_size->x + 1) * sizeof(char));
 		arr_temp[y] = ft_strdup(map->arr[y]);
 		if (!arr_temp[y])
 			return (NULL);
@@ -37,6 +36,7 @@ char	**ft_arr_temp(t_map *map)
 static void	ft_fill(char **tab, t_point *size, t_point *cur, char to_fill)
 {
 	t_point	temp;
+
 	if (cur->y < 0 || cur->y >= size->y || cur->x < 0 || cur->x >= size->x
 		|| tab[cur->y][cur->x] == 'F' || tab[cur->y][cur->x] == '1'
 		|| tab[cur->y][cur->x] == 'E')

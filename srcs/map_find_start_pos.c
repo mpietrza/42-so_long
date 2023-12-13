@@ -6,7 +6,7 @@
 /*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:02:56 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/12/13 10:46:51 by mpietrza         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:53:20 by mpietrza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ void	ft_map_find_start_pos(t_map *map)
 	if (player_count == 0)
 		ft_clup_map_and_exit(map, "Error\nThere is no players on a map\n");
 	if (player_count > 1)
-		ft_clup_map_and_exit(map, "Error\nThere are to many players on a map\n");
+		ft_clup_map_and_exit(map,
+			"Error\nThere are to many players on a map\n");
 }

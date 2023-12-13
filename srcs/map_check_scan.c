@@ -6,7 +6,7 @@
 /*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:07:26 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/12/12 14:22:54 by mpietrza         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:52:42 by mpietrza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static void	ft_map_check_scan_core(t_map *map, int x, int y)
 		ft_clup_map_and_exit(map,
 			"Error\nLoaded map file has wrong symbols\n");
 	}
-	if ((y == 0 || x == 0 || y ==  map->map_size->y - 1
+	if ((y == 0 || x == 0 || y == map->map_size->y - 1
 			|| x == map->map_size->x - 1) && c != '1')
-		 ft_clup_map_and_exit(map,
+		ft_clup_map_and_exit(map,
 			"Error\nLoaded map is not closed by walls\n");
 }
 

@@ -6,7 +6,7 @@
 /*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:19:46 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/12/12 14:26:16 by mpietrza         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:46:16 by mpietrza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,36 +83,32 @@ typedef struct s_data
 
 
 /* list of functions */
-// int		ft_1st_line_len(int fd); -not used anymore
 int		ft_count_chars(char *s, char c);
-//int		ft_count_lines(int fd, t_data *data, int img_w); -not used anymore
 void	ft_clup_img(t_data *data);
 void	ft_clup_map(t_map *map);
 void	ft_clup_map_size(t_point *map_size);
 void	ft_clup_data(t_data *data);
-void	ft_clup_and_exit(t_data *data, const char *error_message); //ok
-void	ft_clup_map_and_exit(t_map *map, const char *error_message); //new
+void	ft_clup_and_exit(t_data *data, const char *error_message);
+void	ft_clup_map_and_exit(t_map *map, const char *error_message);
+void	ft_cleanup_map_array(char **arr, int j);
 void	ft_error_exit(const char *error_message);
 int		ft_exit(void *param);
-//void	ft_free_and_exit(t_data *data, const char *error_message); - not used anymore
 void	ft_flood_fill(char **tab, t_point *size, t_point *begin);
-t_data	*ft_init_data(t_map *map); //ok
-t_map	*ft_init_map(char *buf_for_arr, t_point *window_size); //ok
-//void	ft_init_img(t_data *data); //ok
-void	ft_map_checks(t_map *map); //new
+t_data	*ft_init_data(t_map *map);
+t_map	*ft_init_map(char *buf_for_arr, t_point *map_size);
+void	ft_map_checks(t_map *map);
 void	ft_map_check_path(t_map *map);
 void	ft_map_check_scan(t_map *map);
 void	ft_map_find_start_pos(t_map *map);
 void	ft_map_load_textures(t_data *data);
-char	*ft_map_parse(int fd, t_point *map_size); //ok
+char	*ft_map_parse(int fd, t_point *map_size);
+char	**ft_map_str_to_arr(char *buf_for_arr);
 char	**ft_arr_temp(t_map *map);
 void	ft_move(t_data *data, char pos, int dir);
-int		ft_open_map_file(char **argv); //new
+int		ft_open_map_file(char **argv);
 void	ft_put_background(t_data *data);
 void	ft_put_object(t_data *data, void *img);
 void	ft_put_player(t_data *data);
-//int		ft_strlen_int(const char *str); -not used anymore
 void	ft_win(t_data *data);
-//void	ft_window_size(t_data *data, char **argv); -not used anymore
 
 #endif

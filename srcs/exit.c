@@ -6,7 +6,7 @@
 /*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:25:43 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/12/12 14:26:06 by mpietrza         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:04:06 by mpietrza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_win(t_data *data)
 }
 
 void	ft_clup_and_exit(t_data *data, const char *error_message)
-{	
+{
 	if (data)
 		ft_clup_data(data);
 	ft_error_exit(error_message);

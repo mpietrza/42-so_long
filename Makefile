@@ -6,7 +6,7 @@
 #    By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 14:21:04 by mpietrza          #+#    #+#              #
-#    Updated: 2023/12/13 16:38:03 by mpietrza         ###   ########.fr        #
+#    Updated: 2023/12/13 17:46:30 by mpietrza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,10 +37,11 @@ W = "\033[37m"
 
 #SOURCES
 
-SRC			= initialize.c \
-			  cleanup.c \
+SRC			= cleanup.c \
 			  exit.c \
 			  flood_fill.c \
+			  initialize.c \
+			  init_map.c \
 			  map_check_path.c \
 			  map_check_scan.c \
 			  map_find_start_pos.c \
