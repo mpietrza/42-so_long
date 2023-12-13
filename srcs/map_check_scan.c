@@ -19,9 +19,6 @@ static void	ft_map_check_scan_core(t_map *map, int x, int y)
 	c = map->arr[y][x];
 	if (!(c == '0' || c == '1' || c == 'C' || c == 'E' || c == 'P'))
 	{
-/*		if (c == '\n')
-			ft_cl-up_map_and_exit(map,
-				"Error\nLoaded map is not rectangular\n");*/
 		ft_clup_map_and_exit(map,
 			"Error\nLoaded map file has wrong symbols\n");
 	}

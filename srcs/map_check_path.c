@@ -6,7 +6,7 @@
 /*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:04:28 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/12/12 14:25:58 by mpietrza         ###   ########.fr       */
+/*   Updated: 2023/12/13 16:42:23 by mpietrza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	ft_clup_arr_copy(char **arr_copy)
 
 	y = 0;
 	if (arr_copy)
+	
 	{
 		while (arr_copy[y])
 		{

@@ -6,7 +6,7 @@
 /*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:06:11 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/12/12 14:25:48 by mpietrza         ###   ########.fr       */
+/*   Updated: 2023/12/13 16:43:14 by mpietrza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,12 @@ char	*ft_map_parse(int fd, t_point *map_size)
 {
 	char	*line;
 	char	*buf_for_arr = NULL;
+	char	*temp = NULL;
 	int		num_of_lines;
 	int		line_len;
 	int		prev_line_len;
 
-	prev_line_len = 0;
+	prev_line_len = -2;
 	num_of_lines = 0;
 	while (1)
 	{
@@ -61,7 +62,7 @@ char	*ft_map_parse(int fd, t_point *map_size)
 		if (line == NULL)
 			break ;
 		line_len = (int)ft_strlen(line);
-		if (line_len != prev_line_len)
+		if (prev_line_len != -2 && line_len != prev_line_len)
 		{
 			free(line);
 			free(map_size);
@@ -69,16 +70,22 @@ char	*ft_map_parse(int fd, t_point *map_size)
 		}
 		else
 		{
-			ft_strlcat(buf_for_arr, line, line_len);
+			if (buf_for_arr == NULL)
+				buf_for_arr = ft_strdup(line);
+			else
+			{
+				temp = ft_strjoin(buf_for_arr, line);
+				free(buf_for_arr);
+				buf_for_arr = temp;
+			}
+
 			free(line);
 			prev_line_len = line_len;
 			num_of_lines++;
 		}
 	}
-	buf_for_arr[(int)ft_strlen(line) - 1] = '\0';
-	free(line);
 	close(fd);
-	map_size->x = line_len;
+	map_size->x = line_len - 1;
 	map_size->y = num_of_lines;
 	return (buf_for_arr);
 }

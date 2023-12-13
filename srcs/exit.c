@@ -37,10 +37,8 @@ void	ft_win(t_data *data)
 	exit(EXIT_SUCCESS);
 }
 
-void	ft_clup_and_exit(t_data *data, t_map *map, const char *error_message)
+void	ft_clup_and_exit(t_data *data, const char *error_message)
 {	
-	if (map)
-		ft_clup_map(map);
 	if (data)
 		ft_clup_data(data);
 	ft_error_exit(error_message);

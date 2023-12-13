@@ -69,6 +69,7 @@ typedef struct s_map
 /* struct - for handling data */
 typedef struct s_data
 {
+	t_map	*map;
 	void	*mlx;
 	void	*window;
 	int		size_x;
@@ -89,7 +90,7 @@ void	ft_clup_img(t_data *data);
 void	ft_clup_map(t_map *map);
 void	ft_clup_map_size(t_point *map_size);
 void	ft_clup_data(t_data *data);
-void	ft_clup_and_exit(t_data *data, t_map *map, const char *error_message); //ok
+void	ft_clup_and_exit(t_data *data, const char *error_message); //ok
 void	ft_clup_map_and_exit(t_map *map, const char *error_message); //new
 void	ft_error_exit(const char *error_message);
 int		ft_exit(void *param);
@@ -101,15 +102,15 @@ t_map	*ft_init_map(char *buf_for_arr, t_point *window_size); //ok
 void	ft_map_checks(t_map *map); //new
 void	ft_map_check_path(t_map *map);
 void	ft_map_check_scan(t_map *map);
-t_point	*ft_map_find_start_pos(t_map *map);
-void	ft_map_load_textures(t_data *data, t_map *map);
+void	ft_map_find_start_pos(t_map *map);
+void	ft_map_load_textures(t_data *data);
 char	*ft_map_parse(int fd, t_point *map_size); //ok
 char	**ft_arr_temp(t_map *map);
-void	ft_move(t_data *data, t_map *map, char pos, int dir);
+void	ft_move(t_data *data, char pos, int dir);
 int		ft_open_map_file(char **argv); //new
 void	ft_put_background(t_data *data);
-void	ft_put_object(t_data *data, t_map *map, void *img);
-void	ft_put_player(t_data *data, t_map *map);
+void	ft_put_object(t_data *data, void *img);
+void	ft_put_player(t_data *data);
 //int		ft_strlen_int(const char *str); -not used anymore
 void	ft_win(t_data *data);
 //void	ft_window_size(t_data *data, char **argv); -not used anymore

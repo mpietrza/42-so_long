@@ -6,7 +6,7 @@
 #    By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 14:21:04 by mpietrza          #+#    #+#              #
-#    Updated: 2023/12/12 14:21:55 by mpietrza         ###   ########.fr        #
+#    Updated: 2023/12/13 16:38:03 by mpietrza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIB_MLX		= $(DIR_MLX)libmlx.a
 INCLUDE		= so_long.h
 FLAGS_MLX	= -Lmlx -lmlx -framework OpenGL -framework AppKit
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror# -fsanitize=address -g3  
+CFLAGS		= -Wall -Wextra -Werror #-fsanitize=address -g
 RM			= rm -f
 
 #COLORS

@@ -6,7 +6,7 @@
 /*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:03:18 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/12/12 14:26:11 by mpietrza         ###   ########.fr       */
+/*   Updated: 2023/12/13 16:45:19 by mpietrza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,25 @@ static char	**map_str_to_arr(char *buf_for_arr)
 {
 	char	**arr = NULL;
 	char	c;
+	int		y;
+	int		x;
 
 	c = 10;
 	arr = ft_split(buf_for_arr, c);
 	if (!arr)
 		return (NULL);
+	y = 0;
+	while (arr[y])
+	{
+		x = 0;
+		while (arr[y][x])
+		{
+			if (arr[y][x] == 10)
+				arr[y][x] = '\0';
+			x++;
+		}
+		y++;
+	}
 	return (arr);
 }
 
@@ -86,13 +100,28 @@ t_map	*ft_init_map(char *buf_for_arr, t_point *map_size)
 		free(map_size);
 		ft_error_exit("Error\nNot able to initialize the program\n");
 	}
-	map->map_size = map_size;
+	map->map_size = (t_point *)malloc(sizeof(t_point));
+	if (!map->map_size)
+		{
+			free(map->arr);
+			free(map_size);
+			ft_error_exit("Error\nNot able to initialize the program\n");
+		}
+	map->map_size->x = map_size->x;
+	map->map_size->y = map_size->y;
 	ft_clup_map_size(map_size);
-	map->player_pos = ft_map_find_start_pos(map);
+	map->player_pos = (t_point *)malloc(sizeof(t_point));
+	if (!map->player_pos)
+		{
+			free(map->arr);
+			free(map->map_size);
+			ft_error_exit("Error\nNot able to initialize the program\n");
+		}
+	map->player_pos->x = 0;
+	map->player_pos->y = 0;
 	map->x = 0;
 	map->y = 0;
 	map->collectibles = 0;
-	ft_printf("Debug 6.5\n");
 	return (map);
 }
 
@@ -108,7 +137,7 @@ t_data	*ft_init_data(t_map *map)
 	if (!data->mlx)
 	{
 		free(data);
-		return (NULL);//!
+		return (NULL);
 	}
 	data->window = NULL;
 	data->size_x = map->map_size->x * IMG_W;
@@ -117,7 +146,6 @@ t_data	*ft_init_data(t_map *map)
 	data->pos_y = 0;
 	data->counter = 0;
 	data->collected = 0;
-	ft_printf("Debug 1.1\n");
 	init_img_status = ft_init_img(data);
 	if (init_img_status == -1)
 	{
@@ -125,5 +153,6 @@ t_data	*ft_init_data(t_map *map)
 		free(data);
 		return (NULL);
 	}
+	data->map = map;
 	return (data);
 }
