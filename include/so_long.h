@@ -6,7 +6,7 @@
 /*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:19:46 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/12/13 17:46:16 by mpietrza         ###   ########.fr       */
+/*   Updated: 2023/12/14 17:47:11 by mpietrza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ typedef struct s_data
 	int		collected;
 	t_img	*img;
 }		t_data;
-
 
 /* list of functions */
 int		ft_count_chars(char *s, char c);
