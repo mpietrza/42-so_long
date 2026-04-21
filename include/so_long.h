@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
+/*   By: milosz <milosz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:19:46 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/12/14 17:47:11 by mpietrza         ###   ########.fr       */
+/*   Updated: 2026/04/21 22:41:51 by milosz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define SO_LONG_H
 
 # include "../mlx/mlx.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -22,15 +24,15 @@
 /* definitions */
 # define IMG_W 32
 # define IMG_H 32
-# define ESC 53
-# define W 13
-# define A 0
-# define S 1
-# define D 2
-# define ARR_UP 126
-# define ARR_LEFT 123
-# define ARR_DOWN 125
-# define ARR_RIGHT 124
+# define ESC XK_Escape
+# define W XK_w
+# define A XK_a
+# define S XK_s
+# define D XK_d
+# define ARR_UP XK_Up
+# define ARR_LEFT XK_Left
+# define ARR_DOWN XK_Down
+# define ARR_RIGHT XK_Right
 # define UP -1
 # define DOWN 1
 # define LEFT -1

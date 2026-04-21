@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_hex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
+/*   By: milosz <milosz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:02:04 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/08/09 15:00:14 by mpietrza         ###   ########.fr       */
+/*   Updated: 2026/04/21 22:42:32 by milosz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 
 static int	char_conv(unsigned int num, const char format)
 {
-	int		ret;
 	char	c;
 
-	ret = 0;
 	if (format == 'x')
 		c = num - 10 + 'a';
 	else if (format == 'X')
@@ -64,8 +62,6 @@ int	ft_print_hex(unsigned int num, const char format)
 	ret = 0;
 	if (num == 0)
 		i = write(1, "0", 1);
-	else if (num < 0)
-		return (-1);
 	else
 		i = ft_put_hex(num, format);
 	if (i < 0)

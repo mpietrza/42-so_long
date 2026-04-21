@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
+/*   By: milosz <milosz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:03:02 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/12/13 17:03:46 by mpietrza         ###   ########.fr       */
+/*   Updated: 2026/04/21 22:41:51 by milosz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,15 @@ void	ft_clup_data(t_data *data)
 {
 	if (data)
 	{
-		if (data->mlx && data->window)
-			mlx_destroy_window(data->mlx, data->window);
 		if (data->img)
 			ft_clup_img(data);
+		if (data->mlx && data->window)
+			mlx_destroy_window(data->mlx, data->window);
 		if (data->mlx)
-			data->mlx = NULL;
+		{
+			mlx_destroy_display(data->mlx);
+			free(data->mlx);
+		}
 		if (data->map)
 			ft_clup_map(data->map);
 		free(data);

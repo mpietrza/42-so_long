@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+         #
+#    By: milosz <milosz@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 14:21:04 by mpietrza          #+#    #+#              #
-#    Updated: 2023/12/13 17:46:30 by mpietrza         ###   ########.fr        #
+#    Updated: 2026/04/21 22:43:46 by milosz           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,9 @@ DIR_OBJS	= ./objs/
 DIR_INCL	= ./include/
 LIBFT		= $(DIR_LIBFT)libft.a
 LIB_MLX		= $(DIR_MLX)libmlx.a
+MLX_GEN		= $(DIR_MLX)Makefile.gen
 INCLUDE		= so_long.h
-FLAGS_MLX	= -Lmlx -lmlx -framework OpenGL -framework AppKit
+FLAGS_MLX	= -L$(DIR_MLX) -lXext -lX11 -lm
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror #-fsanitize=address -g
 RM			= rm -f
@@ -63,12 +64,15 @@ all:	$(DIR_OBJS) $(NAME)
 
 $(DIR_OBJS)%.o : $(DIR_SRCS)%.c
 	@echo $(B)Compiling [$<]... $(DEF_COLOR)
-	$(CC) $(CFLAGS) -MMD -MP -Imlx -c -o $@ $<
+	$(CC) $(CFLAGS) -MMD -MP -I$(DIR_MLX) -I$(DIR_INCL) -c -o $@ $<
 
 utils:
 	@echo $(B)
-	make -C $(DIR_MLX)
-	make -C $(DIR_LIBFT)
+	@if [ ! -f "$(MLX_GEN)" ]; then \
+		cd $(DIR_MLX) && ./configure >/dev/null 2>&1 || test -f Makefile.gen; \
+	fi
+	$(MAKE) -C $(DIR_MLX) -f Makefile.gen
+	$(MAKE) -C $(DIR_LIBFT)
 	@echo $(DEF_COLOR)
 
 $(DIR_OBJS):
@@ -77,17 +81,21 @@ $(DIR_OBJS):
 
 $(NAME): $(OBJS) Makefile
 	$(MAKE) utils
-	$(CC) $(CFLAGS) $(OBJS) $(FLAGS_MLX) $(LIB_MLX) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIB_MLX) $(LIBFT) $(FLAGS_MLX) -o $(NAME)
 	@echo $(G)So_long compiled successfully! $(DEF_COLOR)
 
 clean:
-	make -C $(DIR_LIBFT) clean 
-	make -C $(DIR_MLX) clean
+	$(MAKE) -C $(DIR_LIBFT) clean 
+	@if [ -f "$(MLX_GEN)" ]; then \
+		$(MAKE) -C $(DIR_MLX) -f Makefile.gen clean; \
+	else \
+		$(MAKE) -C $(DIR_MLX) clean; \
+	fi
 	$(RM) -rf $(OBJS) $(DEPS) $(DIR_OBJS)
 	@echo $(GRAY)So_long object files erased succesfully! $(DEF_COLOR)
 
 fclean: clean
-	make -C $(DIR_LIBFT) fclean
+	$(MAKE) -C $(DIR_LIBFT) fclean
 	$(RM) $(NAME)
 	@echo $(GRAY)So_long executable files erased succesfully! $(DEF_COLOR)
 	

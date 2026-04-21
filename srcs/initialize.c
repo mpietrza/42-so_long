@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
+/*   By: milosz <milosz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:03:18 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/12/13 17:51:03 by mpietrza         ###   ########.fr       */
+/*   Updated: 2026/04/21 22:41:51 by milosz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
+
+static int	ft_img_loaded(t_data *data)
+{
+	return (data->img->player_up && data->img->player_left
+		&& data->img->player_down && data->img->player_right
+		&& data->img->background && data->img->wall
+		&& data->img->collectible && data->img->exit);
+}
 
 static void	ft_init_img_core(t_data *data,
 		int img_width, int img_height, char *img_path)
@@ -47,12 +55,14 @@ static int	ft_init_img(t_data *data)
 	int		img_height;
 	char	img_path[50];
 
-	data->img = (t_img *)malloc(sizeof(t_img));
+	data->img = (t_img *)ft_calloc(1, sizeof(t_img));
 	if (!data->img)
 		return (-1);
 	img_width = 0;
 	img_height = 0;
 	ft_init_img_core(data, img_width, img_height, img_path);
+	if (!ft_img_loaded(data))
+		return (-1);
 	return (0);
 }
 
@@ -85,6 +95,9 @@ t_data	*ft_init_data(t_map *map)
 	init_img_status = ft_init_img(data);
 	if (init_img_status == -1)
 	{
+		if (data->img)
+			ft_clup_img(data);
+		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 		free(data);
 		return (NULL);

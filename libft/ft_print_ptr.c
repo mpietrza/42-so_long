@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_ptr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
+/*   By: milosz <milosz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:14:35 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/11/08 16:50:57 by mpietrza         ###   ########.fr       */
+/*   Updated: 2026/04/21 22:43:21 by milosz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
+#include <stdint.h>
 
 static int	ft_put_ptr(uintptr_t num)
 {

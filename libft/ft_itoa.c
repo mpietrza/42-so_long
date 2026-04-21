@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
+/*   By: milosz <milosz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 15:05:41 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/07/12 12:49:31 by mpietrza         ###   ########.fr       */
+/*   Updated: 2026/04/21 22:41:51 by milosz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdlib.h>
+
 #include "libft.h"
 
-size_t static	int_len(int n)
+static size_t	int_len(int n)
 {
 	size_t	len;
 
@@ -34,7 +34,7 @@ size_t static	int_len(int n)
 	return (len);
 }
 
-char static	pos_neg_0(long int ln)
+static char	pos_neg_0(long int ln)
 {
 	char	symbol;
 

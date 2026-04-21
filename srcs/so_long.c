@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpietrza <mpietrza@student.42barcel>       +#+  +:+       +#+        */
+/*   By: milosz <milosz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:20:32 by mpietrza          #+#    #+#             */
-/*   Updated: 2023/12/14 17:46:39 by mpietrza         ###   ########.fr       */
+/*   Updated: 2026/04/21 22:41:51 by milosz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static int	ft_render_next_frame(t_data *data)
 {
 	ft_put_background(data);
 	ft_map_load_textures(data);
-	mlx_hook(data->window, 17, 1L << 2, ft_exit, data);
-	mlx_key_hook(data->window, ft_key_hook, data);
+	mlx_hook(data->window, DestroyNotify, StructureNotifyMask, ft_exit, data);
+	mlx_hook(data->window, KeyPress, KeyPressMask, ft_key_hook, data);
 	return (0);
 }
 
